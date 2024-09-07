@@ -1,4 +1,4 @@
-{% set version = "0.0.6" %}
+{% set version = "0.0.7" %}
 
 package:
   name: asyncpg-listen
@@ -7,10 +7,10 @@ package:
 source:
   - folder: dist
     url: https://pypi.io/packages/source/a/asyncpg-listen/asyncpg-listen-{{ version }}.tar.gz
-    sha256: f3a889a3848903e4710705e785fd95940b3a5939a89a660827cdaaa113e1959e
+    sha256: 33d8c6a69bb20139d143fd9e4035a4627ac76fbea4d874529f99fbb33f0596c5
   - folder: src
     url: https://github.com/anna-money/asyncpg-listen/archive/refs/tags/v{{ version }}.tar.gz
-    sha256: 4455a6c221deeca556ec5409fda4f62469fd89f76762136b0ff6ad8b78fa0241
+    sha256: 79e148ddd6559ca46dfd1ed5989beaefe9743e8b0923b6aa2fbf798cf2404a1a
 
 build:
   script:
