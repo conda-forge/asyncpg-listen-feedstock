@@ -20,7 +20,7 @@ build:
   number: 0
   noarch: python
   script:
-    - ${{ PYTHON }} -c "p = __import__('pathlib').Path; [p(f'dist/{f}').write_bytes(p(f'src/{f}').read_bytes()) for f in ${{ COPY_FILES }}]"
+    - ${{ PYTHON }} -c "p = __import__('pathlib').Path; [p(f'dist/{f}').write_bytes(p(f'src/{f}').read_bytes()) for f in ['CHANGELOG.md', 'asyncpg_listen/py.typed']]"
     - cd dist && ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
