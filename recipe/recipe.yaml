@@ -1,0 +1,57 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/prefix-dev/recipe-format/main/schema.json
+schema_version: 1
+
+context:
+  version: 0.0.8
+
+package:
+  name: asyncpg-listen
+  version: ${{ version }}
+
+source:
+  - url: https://pypi.org/packages/source/a/asyncpg-listen/asyncpg-listen-${{ version }}.tar.gz
+    sha256: a2aea628a148ea016d9bcc5f80a5b9b0b56756d0ed76fdbc376ff50e238e493f
+    target_directory: dist
+  - url: https://github.com/anna-money/asyncpg-listen/archive/refs/tags/v${{ version }}.tar.gz
+    sha256: 7260843416b189d255b3cf626b66330fb7b1b1344fd2b90a805b6643290d9fdd
+    target_directory: src
+
+build:
+  number: 0
+  noarch: python
+  script:
+    - ${{ PYTHON }} -c "p = __import__('pathlib').Path; [p(f'dist/{f}').write_bytes(p(f'src/{f}').read_bytes()) for f in ${{ COPY_FILES }}]"
+    - cd dist && ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - pip
+    - python ${{ python_min }}.*
+    - setuptools
+  run:
+    - asyncpg >=0.27.0
+    - python >=${{ python_min }}
+
+tests:
+  - python:
+      imports: asyncpg_listen
+      pip_check: true
+      python_version:
+        - ${{ python_min }}.*
+        - 3.13.*
+  - requirements:
+      run:
+        - mypy
+        - python ${{ python_min }}.*
+    script:
+      - mypy -m asyncpg_listen
+
+about:
+  summary: Helps to use PostgreSQL listen/notify with asyncpg
+  license: MIT
+  license_file: dist/LICENSE
+  homepage: https://github.com/anna-money/asyncpg-listen
+
+extra:
+  recipe-maintainers:
+    - bollwyvl
