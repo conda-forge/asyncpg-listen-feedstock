@@ -1,5 +1,5 @@
-{% set python_min = '3.11' %}
-{% set version = "0.0.7" %}
+{% set python_min = "3.11" %}
+{% set version = "0.0.8" %}
 {% set COPY_FILES = ['CHANGELOG.md', 'asyncpg_listen/py.typed'] %}
 
 package:
@@ -9,16 +9,16 @@ package:
 source:
   - folder: dist
     url: https://pypi.org/packages/source/a/asyncpg-listen/asyncpg-listen-{{ version }}.tar.gz
-    sha256: 33d8c6a69bb20139d143fd9e4035a4627ac76fbea4d874529f99fbb33f0596c5
+    sha256: a2aea628a148ea016d9bcc5f80a5b9b0b56756d0ed76fdbc376ff50e238e493f
   - folder: src
     url: https://github.com/anna-money/asyncpg-listen/archive/refs/tags/v{{ version }}.tar.gz
-    sha256: 79e148ddd6559ca46dfd1ed5989beaefe9743e8b0923b6aa2fbf798cf2404a1a
+    sha256: 7260843416b189d255b3cf626b66330fb7b1b1344fd2b90a805b6643290d9fdd
 
 build:
   script:
     - {{ PYTHON }} -c "p = __import__('pathlib').Path; [p(f'dist/{f}').write_bytes(p(f'src/{f}').read_bytes()) for f in {{ COPY_FILES }}]"
     - cd dist && {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 1
+  number: 0
   noarch: python
 
 requirements:
