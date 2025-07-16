@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  version: 0.0.8
+  version: "0.0.9"
 
 package:
   name: asyncpg-listen
@@ -10,10 +10,10 @@ package:
 
 source:
   - url: https://pypi.org/packages/source/a/asyncpg-listen/asyncpg-listen-${{ version }}.tar.gz
-    sha256: a2aea628a148ea016d9bcc5f80a5b9b0b56756d0ed76fdbc376ff50e238e493f
+    sha256: f94c4752f7ca1077eaaad0fa2c08fcef4990eaae81a61c423683a722ca3f3a33
     target_directory: dist
   - url: https://github.com/anna-money/asyncpg-listen/archive/refs/tags/v${{ version }}.tar.gz
-    sha256: 7260843416b189d255b3cf626b66330fb7b1b1344fd2b90a805b6643290d9fdd
+    sha256: df27e60e4df163311f74b6baa8df821030464ef157f93a22695ed7a125d664b2
     target_directory: src
 
 build:
